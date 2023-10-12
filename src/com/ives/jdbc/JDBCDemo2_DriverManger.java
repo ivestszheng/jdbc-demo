@@ -7,13 +7,13 @@ import java.sql.Statement;
 /**
  * JDBC 快速入门
  */
-public class JDBCDemo {
+public class JDBCDemo2_DriverManger {
     public static void main(String[] args) throws Exception {
         // 1. 注册驱动
-        Class.forName("com.mysql.jdbc.Driver");
+        // Class.forName("com.mysql.jdbc.Driver");
 
         // 2JDBCDemo. 获取连接
-        String url = "jdbc:mysql://127.0.0.1:3306/db1";
+        String url = "jdbc:mysql:///db1?useSSL=false";
         String username = "root";
         String password = "root";
         Connection conn = DriverManager.getConnection(url, username, password);
@@ -26,5 +26,14 @@ public class JDBCDemo {
 
         // 5. 执行 sql
         int count = stmt.executeUpdate(sql);
+        if (count > 0){
+            System.out.println("修改成功~");
+        }else{
+            System.out.println("修改失败~");
+        }
+
+        // 6. 关闭资源
+        stmt.close();
+        conn.close();
     }
 }
